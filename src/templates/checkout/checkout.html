@@ -1,0 +1,106 @@
+{% extends "dashboard/base.html" %}  
+{% load static %}
+
+
+
+<!---  PAGE_TITLE  ----------------------------- -->
+{% block    PAGE_TITLE  %} 
+<h2 class="text-center"> Checkout  </h2>
+{% endblock PAGE_TITLE  %}  
+
+
+<!---  MESSAGES_CONTENTS  ---------------------- -->
+{% block    MESSAGES_CONTENTS  %}
+
+  <!---  Show The Alert Message  ----------------------------- -->
+	{% include 'aler_messages/alert_message.html'%}
+
+{% endblock MESSAGES_CONTENTS  %}  
+
+
+
+<!---  CONTENTS_PAGE --------------------------- -->
+{% block    CONTENTS_PAGE %} 
+
+<div class="container">    
+  <div id="loginbox" style="margin-top:5px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+
+
+
+<div class="container-fluid row">
+  <div class="col-lg-12">
+      <div class="box-element">
+          <div class="checkout-right-basket">
+              <a href="{% url 'cart-URL' %}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Cart</a>
+          </div>
+
+        
+
+    
+ 
+          </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="box-element" id="form-wrapper">
+              <form  method="POST" action="{% url 'checkout_confirm-URL' %}">
+                {% csrf_token %}
+                    <div id="shipping-info">
+                        <hr>
+                        <div class="">
+                            <input class="form-control" type="text" name="address" placeholder="Address.." required>
+                        </div>
+                        <div class="form-field mt-3">
+                            <input class="form-control" type="text" name="city" placeholder="City.." required>
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="state" placeholder="State.." required>
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code.." required>
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="phone_number" placeholder="Phone Number.." required>
+                        </div>
+                        <div class="mt-3">
+                            <select name="payment" id="payment" class="form-control mt-3">
+                                <option value="Cash On Delivery">Cash On Delivery</option>
+                                <option value="Credit Card">Credit Card</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" value="Confirm" id="form-button" class="btn btn-success">
+                </form>
+            </div>
+            <hr>
+            <h3>Order Summary</h3>
+<hr>
+            <div class="checkout-left-basket">
+              <ul>
+                  <li>Order Number <i>-</i> <span>( {{ order_VAR.id }} )</span></li>
+                  <li>Number Of Products <i>-</i> <span>( {{OrderDetails_VAR.count}} )</span></li>
+                  <li>Total <i>-</i> <span>SR ( {{ total_VAR}} )</span></li>
+              </ul>
+          </div>
+
+            <hr>
+
+            <br>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    
+    </div>
+    </div>
+    {% comment %} {% endblock %} {% endcomment %}
+    
+    
+
+
+{% endblock CONTENTS_PAGE %} 
+
+
+
+<!---  PAGINATION --------------------------- -->
+{% block    PAGINATION %} 
+{% endblock PAGINATION %} 

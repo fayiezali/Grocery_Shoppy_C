@@ -1,0 +1,147 @@
+{% extends "dashboard/base.html" %}  
+{% load static %}
+
+
+<!---  PAGE_TITLE  ----------------------------- -->
+{% block    PAGE_TITLE  %} 
+<h2 class="text-center"> Cart </h2>
+{% endblock PAGE_TITLE  %}  
+
+
+<!---  MESSAGES_CONTENTS  ---------------------- -->
+{% block    MESSAGES_CONTENTS  %}
+
+	<!---  Show The Alert Message  ----------------------------- -->
+	{% include 'aler_messages/alert_message.html'%}
+
+{% endblock MESSAGES_CONTENTS  %}  
+
+<!---  CONTENTS_PAGE --------------------------- -->
+{% block    CONTENTS_PAGE %} 
+
+{% comment %} Check for an order {% endcomment %}
+{% if order_VAR %}
+
+	<div class="checkout">
+		<div class="container">
+			<div class="checkout-right">
+			<table class="timetable_sub">
+
+					{% comment %} Table titles {% endcomment %}
+					<thead>
+						<tr>
+							<th scope="col">No.</th>
+							<th scope="col">Product</th>
+							<th scope="col">Image</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Price</th>
+							<th scope="col">Subtotal</th>
+							<th scope="col">Control</th>
+						</tr>
+					</thead>
+{% comment %}
+Any field in another table can be accessed from this table, provided they have a relationship
+line.OrderDetails_product.product_image:
+1-Table OrderDetails
+2- Table Product
+3- Field 
+{% endcomment %}
+{% for line in OrderDetails_VAR %}
+
+				<tr class="rem1">
+
+					{% comment %} Auto Numbering {% endcomment %}
+						<td class="invert">{{forloop.counter}}</td>
+
+						{% comment %} Product Name {% endcomment %}
+						<td class="invert">{{line.OrderDetails_product}}</td>
+
+						{% comment %} Product Image {% endcomment %}
+						<td 
+						class="invert-image">
+						<a href="single.html">
+							<img class="profile_img"
+							src=" {{ line.OrderDetails_product.product_image.url }}"
+							width="80" height="80" alt=" " class="img-responsive" />
+						</a>
+						</td>
+
+						<td class="invert">
+							<div class="quantity"> 
+								<div class="quantity-select">                           
+									{% comment %} Reduce the quantity of the product in the cart {% endcomment %}
+									<a href="{% url 'reduce_quantity_product_in_cart-URL' orderdetails_id=line.id %}"  class="btn btn-info btn-sm">-</a>
+									{% comment %} {{line.OrderDetails_quantity}} {% endcomment %}
+									<div class="entry value"><span>{{line.OrderDetails_quantity}}</span></div>
+									{% comment %} Increase the quantity of the product in the cart {% endcomment %}
+									<a href="{% url 'increase_quantity_product_in_cart-URL' orderdetails_id=line.id %}"  class="btn btn-info btn-sm">+</a>
+								</div>
+							</div>
+						</td>
+
+						{% comment %} Product Price {% endcomment %}
+						<td class="invert">{{line.OrderDetails_price}}</td>
+
+						{% comment %} Product Subtotal {% endcomment %}
+						{% comment %} {% widthratio line.OrderDetails_quantity 1 line.OrderDetails_price %} - هنا إجراء عملية الضرب
+						{% widthratio line.OrderDetails_quantity 2 line.OrderDetails_price %} - هنا إجراء عملية القسمة {% endcomment %}
+						<td class="invert">{% widthratio line.OrderDetails_quantity 1 line.OrderDetails_price %}</td>
+
+						{% comment %} Delete the product {% endcomment %}
+						<td> <a href="{% url 'remove_from_cart-URL' orderdetails_id=line.id %}" class="btn btn-danger btn-sm">X</a> </td>
+				</tr>
+
+{% empty %}
+		<h5 class="alert alert-info"> No Order Details Here </h5>
+{% endfor %}
+
+			</table>
+				
+			</div>
+			<div class="checkout-left">	
+				<div class="checkout-right-basket">
+					<a href="{% url 'checkout-URL' %}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Checkout - Payment Page</a>
+				<hr>
+				</div>			
+				<div class="checkout-left-basket">
+					{% comment %} <h5>User ID: {{tax_rate_VAR.get_current_user_id_PROPERTY}} </h5>
+					<h5>User Name: {{tax_rate_VAR.get_current_user_username_PROPERTY}} </h5>
+					<h5>Order No.: {{tax_rate_VAR.get_current_order_id_PROPERTY}} </h5> {% endcomment %}
+					<h4> Checkout </h4>
+					<ul>
+						<li>Order Number-OrderDetails_VAR         :<span>( {{OrderDetails_VAR.get_order_number_PROPERTY}}            )</span></li>
+						<li>Order Number                          :<span>( {{order_VAR.get_order_number_PROPERTY}}            )</span></li>
+						<li>Count Of Items                        :<span>( {{order_VAR.get_count_of_items_PROPERTY}}          )</span></li>
+						<li>Quantity Of Products                  :<span>( {{order_VAR.get_quantity_of_products_PROPERTY}}    )</span></li>
+						<li>Tax %             		              :<span>( {{tax_rate_VAR.get_tax_rate_PROPERTY}}             )</span></li>
+						<li>Amount Of Products (Witheout VAT/Tax) :<span>( {{tax_rate_VAR.get_amount_of_products_witheout_VAT_Tax_PROPERTY}}    )</span></li>
+						<li>Tax Amount - SR                       :<span>( {{tax_rate_VAR.get_tax_amount_PROPERTY}}           )</span></li>
+						<li>Service Charges - SR                  :<span>( {{tax_rate_VAR.get_service_charges_PROPERTY}}                                          )</span></li>
+						<li>Subtotal (Withe VAT/Tax)              :<span>( {{tax_rate_VAR.get_subtotal_without_tax_PROPERTY}} )</span></li>
+						<li>Discount - SR                         :<span>( {{tax_rate_VAR.get_discount_PROPERTY}}			  )</span></li>
+						<li>GrandTotal - SR(Withe Tax & Discount) :<span>( {{tax_rate_VAR.get_grandtotal_withe_tax_and_discount_PROPERTY}} )</span></li>
+
+					</ul>
+				</div>
+				<div class="checkout-right-basket">
+					<a href="{% url 'dashboard-URL' %}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
+				<hr>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+
+	
+{% else%}
+	<h5 class="alert alert-info"> No Orders Here </h5>
+{% endif %}
+
+{% endblock CONTENTS_PAGE %} 
+
+
+
+<!---  PAGINATION --------------------------- -->
+{% block    PAGINATION %} 
+{% endblock PAGINATION %} 
+

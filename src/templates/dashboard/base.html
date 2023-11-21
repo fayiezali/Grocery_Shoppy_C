@@ -1,0 +1,51 @@
+{% comment %} {% load static %} {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!--- FILES CSS & FONTS & IMAGES  -------------- -->
+{% include 'dashboard/files_css_fonts_images.html'%}
+
+
+<!---  HEADER_PAGE_INCLUDE  -------------------- -->
+{% include 'dashboard/files_js_jquery.html'%}
+
+
+<!---  HEADER_PAGE_INCLUDE  -------------------- -->
+{% include 'dashboard/header.html'%}
+
+
+<!---  PAGE_TITLE  ---------------------------- -->
+{% block    PAGE_TITLE  %} 
+{% endblock PAGE_TITLE  %}  
+
+
+<!---  MESSAGES_CONTENTS  -------------------- -->
+{% block    MESSAGES_CONTENTS  %}
+{% endblock MESSAGES_CONTENTS  %}  
+
+
+<!---  CONTENTS_PAGE ------------------------- -->
+{% block    CONTENTS_PAGE %} 
+{% endblock CONTENTS_PAGE %} 
+
+
+<!---  USERISAUTHENTICATED ------------------ -->
+{% block    USER_IS_AUTHENTICATED %} 
+{% endblock USER_IS_AUTHENTICATED %} 
+
+
+<!---  PAGINATION --------------------------- -->
+{% block    PAGINATION %} 
+{% endblock PAGINATION %} 
+
+
+<!---  FOOTER_PAGE_INCLUDE  ------------------- -->
+{% include 'dashboard/footer.html'%}
+
+
+
+
+</html>

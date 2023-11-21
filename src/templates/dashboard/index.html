@@ -1,0 +1,129 @@
+{% extends "dashboard/base.html" %}  
+{% load static %}
+
+
+<!---  PAGE_TITLE  ----------------------------- -->
+{% block    PAGE_TITLE  %} 
+	<h2 class="text-center"> index - dashboard  </h2>
+{% endblock PAGE_TITLE  %}  
+
+
+<!---  MESSAGES_CONTENTS  ---------------------- -->
+{% block    MESSAGES_CONTENTS  %}
+
+	<!---  Show The Alert Message  ----------------------------- -->
+	{% include 'aler_messages/alert_message.html'%}
+
+{% endblock MESSAGES_CONTENTS  %}  
+
+<!---  CONTENTS_PAGE --------------------------- -->
+{% block    CONTENTS_PAGE %} 
+
+<!-- banner -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">  
+<div class="carousel-inner" role="listbox">
+
+			
+{% comment %} ================================================================================== {% endcomment %}
+
+
+<div class="side-bar col-md-3">
+	<div class="search-hotel">
+		{% comment %} <h3 class="agileits-sear-head"> Categories</h3> {% endcomment %}
+			<div class="left-side">
+
+				<table border='1' style="width:100%; text-align:center">
+					<thead>
+						<tr>
+							<th  class="text-center"> No          </th>
+							<th  class="text-center"> Categories  </th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td>0</td>
+								<td> <a href="/category_sub_path">  <h4 class="text-left" > All Subcategory </h4></a></td>
+							</tr>
+					</tbody>
+					<tbody>
+							{% for category_sub_item in sub_categories_VAR %}
+								<tr>
+									<td class="invert">{{forloop.counter}}</td>
+									<td>   <a href="/category_sub_path?category_sub_item={{category_sub_item.id}}"> 	<h4 class="text-left"> {{category_sub_item.SubCat_name}}  </h4></a> </td>
+								</tr>
+							{% endfor %}
+					</tbody>
+				</table>
+<div class="list-group">
+</div>
+</div>
+</div>
+</div>
+
+{% comment %} ===================================================================================== {% endcomment %}
+<h4>get_total_VAR.get_example_PROPERTY:( {{get_total_VAR.get_example_PROPERTY}} )<h4>
+<h4>get_total_VAR.get_all_order_STATICMETHOD: ( {{get_total_VAR.get_all_order_STATICMETHOD}} )<h4>
+<h4>get_total_VAR.is_adult_STATICMETHOD: ( {{get_total_VAR.is_adult_STATICMETHOD}} )<h4>
+
+
+
+<div class="col-md-9 product-men">
+	<div class="container mt-2 mb-3" >
+		<div class="row">
+			
+			{% for products_all_itme_VAR in products_all_VAR %}
+
+				<div class="col-lg-4 my-4">
+					<div class="card shadow align-items-center" style="width: 13rem; height: 25rem;">
+
+						{% comment %} (1)View Image product  {% endcomment %}
+						<img class="profile_img" src=" {{ products_all_itme_VAR.product_image.url }}" alt="" width="150" height="150">
+								<div class="card-body"> 
+
+						{% comment %} (2)Product Name  & Link Product Details{% endcomment %}
+								<a> {{products_all_itme_VAR.product_name }}</a>  <hr>
+				
+
+						{% comment %} (3)View product details {% endcomment %}
+								<a href="{% url 'product_detail-URL' products_all_itme_VAR.id %}">Quick View</a>
+								
+							<div class="info-product-price">
+
+						{% comment %} (4)The price after discount {% endcomment %}
+								<span class="item_price"> {{products_all_itme_VAR.product_price }}</span> 
+
+						{% comment %} (5)Price before discount {% endcomment %}
+								<del>$110.00</del> 
+							</div>
+								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+
+						{% comment %} Form Action {% endcomment %}
+								<form action="{% url 'add_to_cart-URL' %}" method="GET">
+									<fieldset> 
+										<input type="hidden" name="pro_id" value="{{ products_all_itme_VAR.id }}">
+										<input type="hidden"   name="qty" lass="form-control" id ="inputqty"  value="1" >
+										<input type="submit" name="submit"  value="Add To Cart" class="button" />
+									</fieldset>
+								</form>
+
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+	
+
+
+
+
+{% endblock CONTENTS_PAGE %} 
+
+
+
+<!---  PAGINATION --------------------------- -->
+{% block    PAGINATION %} 
+{% endblock PAGINATION %} 

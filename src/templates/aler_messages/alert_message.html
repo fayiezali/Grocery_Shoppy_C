@@ -1,0 +1,24 @@
+<div class="container-fluid h-custom">
+<!-- ظهور رسالة للمستخدم -->
+    {% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+        {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+    <!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+		<div  class="alert alert-{{message.tags}}">
+			<strong>
+                {% if 'danger' == message.tags %}
+                    error <!--  Replace The Word danger with The Word error -->
+                {%else %}
+                    {{message.tags|title}} <!-- Message Title -->
+                {% endif %}
+            </strong> 
+                :{{ message }} <!-- The Variable That Carries The Content Of The Message-->
+			{% comment %} <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#my-alert" aria-label="Close"></button> {% endcomment %}
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% comment %} 
+messages.info(request    , "Logged out successfully.")
+messages.success(request , "Logged out successfully.")
+messages.error(request   , "Logged out successfully.") 
+{% endcomment %}

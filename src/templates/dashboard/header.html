@@ -1,0 +1,13 @@
+
+
+{% if  user.is_authenticated %}
+
+		<!---  USER_IS_AUTHENTICATED_INCLUDE  ----------------------------- -->
+		{% include 'dashboard/user_is_authenticated.html'%}
+
+{% else %}
+
+		<!---  USER_IS_NOT_AUTHENTICATED_INCLUDE  ----------------------------- -->
+		{% include 'dashboard/user_is_not_authenticated.html'%}
+
+{% endif %}
