@@ -77,16 +77,18 @@ class OrderDetailsMODEL(models.Model):
                 'Product: ' + self.OrderDetails_product.product_name + ' - ' +\
                 'Order Id: ' + str(self.OrderDetails_order.id)
 # ===============Example For - Property & Method============================
+    # It performs the calculation - plural
     @property
-    def get_example_PROPERTY(self):
+    def get_sum_PROPERTY(self):
         total = 100 + 50
         return total 
-
+    # You display all the required data
     @staticmethod
     def get_all_order_STATICMETHOD():
         send_result = OrderDetailsMODEL.objects.all()
         return send_result
-    
+    # It performs a logical process that contains conditions - if
+    # Received Parmeter
     @staticmethod
     def is_adult_STATICMETHOD(age):
         if age > 18:
@@ -95,6 +97,11 @@ class OrderDetailsMODEL(models.Model):
         else:
             send_result = 'No' 
             return send_result
+    # It performs a filter for the required data
+    # Received Parmeter
+    @staticmethod                                     # Model
+    def get_orders_by_customer(customer_id):          # Model
+        return OrderMODEL.objects.filter(order_user=customer_id).order_by('-order_order_date')
 # ===============TESTING============================
 
     #
