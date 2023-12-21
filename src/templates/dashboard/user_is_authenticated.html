@@ -11,7 +11,7 @@
 	<div class="header-bot">
 		<div class="header-bot_inner_wthreeinfo_header_mid">
 			<!-- header-bot-->
-			<h4> Welcome: ( {{user.username}} ) - ( {{order_VAR.get_count_of_items_PROPERTY}} )</h4> 
+			<h4> Welcome: ( {{user.username}} ) - ( {{order_VAR.get_quantity_of_products_PROPERTY}} )</h4> 
 
 			<div class="col-md-4 logo_agile">
 				<h1>
@@ -85,7 +85,7 @@
 					<div class="wthreecartaits wthreecartaits2 cart cart box_1" >
 						<form action="{% url 'cart-URL' %}"  >
 							<button class="w3view-cart" type="submit" name="submit" value="" > 
-								<i class="fa fa-cart-arrow-down" aria-hidden="true"><h4>( {{order_VAR.get_count_of_items_PROPERTY}} )<h4></i>
+								<i class="fa fa-cart-arrow-down" aria-hidden="true"><h4>( {{order_VAR.get_quantity_of_products_PROPERTY}} )<h4></i>
 							</button>
 						</form>
 					</div>

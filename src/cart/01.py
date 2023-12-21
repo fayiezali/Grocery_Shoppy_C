@@ -1,9 +1,9 @@
-from django.db import models
-from .models import *
-from product.models import *
-from track_shipment.models import *
+# from django.db import models
+# from .models import *
+# from product.models import *
+# from track_shipment.models import *
 # from decimal import Decimal
-from django.contrib.auth.models import User # إستيراد اسم المستخدم
+# from django.contrib.auth.models import User # إستيراد اسم المستخدم
 #
 #
 class OrderMODEL(models.Model):
@@ -28,6 +28,15 @@ class OrderMODEL(models.Model):
     #
     # 
     #
+    
+    @property
+    def get_order_number_PROPERTY(self):
+        order_number_VAR=0
+        order_number_VAR = self.orderdetailsmodel_set.all()
+        for sub in order_number_VAR:
+            # 
+            return sub.OrderDetails_order.id
+
     @property
     def get_order_number_PROPERTY(self):
         order_number_VAR=0
@@ -117,13 +126,3 @@ class OrderDetailsMODEL(models.Model):
             # 
             return sub.OrderDetails_order.id
 
-
-
-    @property
-    def get_order_user_PROPERTY(self , user_name_PAR ):
-        order_user_VAR = None
-        order_user_VAR = OrderMODEL.objects.filter(order_user=user_name_PAR)
-        return order_user_VAR
-    # @staticmethod                                     # Model
-    # def get_orders_by_customer(customer_id):          # Model
-    #     return OrderMODEL.objects.filter(order_user=customer_id).order_by('-order_order_date')

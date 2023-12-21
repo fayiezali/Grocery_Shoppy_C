@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "j-zeppenfeld.tab-indent-space-align"
+        "j-zeppenfeld.tab-indent-space-align",
+        "esbenp.prettier-vscode"
     ]
 }
